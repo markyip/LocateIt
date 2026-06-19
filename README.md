@@ -15,7 +15,7 @@ Each cluster pin shows **how many photos** share that location (default **5 m** 
 
 Repository: [github.com/markyip/LocateIt](https://github.com/markyip/LocateIt)
 
-**LocateIt Lite** (single-photo GPS viewer, smaller install): [Download v1.1.0](https://github.com/markyip/LocateIt/releases/tag/v1.1.0-lite) · [README-LITE.md](README-LITE.md)
+**LocateIt Lite** (single-photo viewer): same [v1.1.0 release](https://github.com/markyip/LocateIt/releases/tag/v1.1.0) — download **`LocateIt-Lite-v1.1.0.zip`** · [README-LITE.md](README-LITE.md)
 
 ---
 
@@ -49,7 +49,7 @@ run.bat "D:\Photos\Trip2024"
 
 Drop **one geotagged photo** on the map to see where it was taken (capture time, lat/lon, ISO, aperture, shutter). No album import, no GPS editing, no session memory. Uses a smaller Python install (~35 MB venv vs ~105 MB for full LocateIt).
 
-**Download:** [LocateIt-Lite v1.1.0 zip](https://github.com/markyip/LocateIt/releases/download/v1.1.0-lite/LocateIt-Lite-v1.1.0.zip) · [Release notes](https://github.com/markyip/LocateIt/releases/tag/v1.1.0-lite)
+**Download:** [v1.1.0 release](https://github.com/markyip/LocateIt/releases/tag/v1.1.0) → **`LocateIt-Lite-v1.1.0.zip`**
 
 From this repo (developers):
 

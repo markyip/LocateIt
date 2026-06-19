@@ -1,8 +1,8 @@
 # LocateIt Lite v1.1.0
 
-Drop **one geotagged photo** on the map to see where it was taken. Read-only — no album import, no GPS editing, no session memory.
+Read-only single-photo GPS viewer. Part of the **LocateIt v1.1.0** release — see [RELEASE_NOTES.md](RELEASE_NOTES.md) for full + Lite downloads and changelog.
 
-Full **LocateIt** (album geotagging): [github.com/markyip/LocateIt](https://github.com/markyip/LocateIt)
+Full **LocateIt** (album geotagging): [github.com/markyip/LocateIt](https://github.com/markyip/LocateIt) · [Release v1.1.0](https://github.com/markyip/LocateIt/releases/tag/v1.1.0)
 
 ## Quick start
 
@@ -19,7 +19,9 @@ chmod +x run-lite.sh stop.sh
 ./run-lite.sh
 ```
 
-Requires **Python 3.10+**. First run creates a small `.venv-lite` (no Pillow/rawpy — about **~40 MB** vs ~105 MB for full LocateIt).
+Requires **Python 3.10+**. First run creates a small `.venv-lite` (about **~35 MB** vs ~105 MB for full LocateIt).
+
+**Download zip:** [LocateIt-Lite-v1.1.0.zip](https://github.com/markyip/LocateIt/releases/download/v1.1.0/LocateIt-Lite-v1.1.0.zip) (from the v1.1.0 release page)
 
 ## How to use
 

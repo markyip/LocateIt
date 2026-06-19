@@ -1,28 +1,66 @@
 # Release notes
 
-## v1.1.0 — LocateIt Lite
+## v1.1.0
 
-Adds **LocateIt Lite**, a read-only single-photo GPS viewer with a smaller install footprint.
+Geotag photo albums on a map (**LocateIt**) and view where a single photo was taken (**LocateIt Lite**). Both are included in this release.
+
+### Downloads
+
+| Package | Use case | Install size (venv) | Download |
+|---------|----------|---------------------|----------|
+| **LocateIt** | Open an album, cluster map, drag ungeotagged photos, **save GPS** to originals | ~105 MB | **Source code (zip)** or clone this repo — run `run-desktop.bat` / `./run-desktop.sh` |
+| **LocateIt Lite** | Drop **one geotagged photo**, read-only map + metadata | ~35 MB | **`LocateIt-Lite-v1.1.0.zip`** on [this release](https://github.com/markyip/LocateIt/releases/tag/v1.1.0) |
+
+Requires **Python 3.10+** on all platforms. See [README.md](README.md) (full) and [README-LITE.md](README-LITE.md) (Lite).
+
+---
+
+### LocateIt — full app
+
+Album workflow for geotagging photos without GPS and reviewing clusters.
+
+- **Open album** — native file dialog (desktop) or browser folder picker
+- **Cluster map** — photos with GPS grouped by location (5 m default radius)
+- **Manual geotagging** — drag ungeotagged photos from the sidebar onto the map
+- **Save to originals** — write GPS into JPEG and RAW (desktop mode; Chrome/Edge in browser mode)
+- **Lightbox viewer** with film strip; **map search**; **Restore album** (desktop)
+- Combined **cluster pin with photo count**; pointer-based drag to map; themed Save dialog
+
+**Launchers:** `run-desktop.bat` / `run.bat` (Windows), `run-desktop.sh` / `run.sh` (macOS / Linux)
+
+**New in v1.1.0**
+
+- Launchers **auto-stop** any existing server on port 8765 before starting
+- README branding (logo, shields) and Lite download link
+
+---
 
 ### LocateIt Lite
 
-- Drop **one geotagged photo** on the map — no Open album button, no folder scan
-- Shows capture time, latitude/longitude, ISO, aperture, and shutter speed
-- Default map center: your **current location** (browser geolocation)
+Minimal read-only viewer — no album import, no GPS editing, no session memory.
+
+- Drop **one geotagged photo** on the map (JPEG, RAW, HEIC, …)
+- Pin at capture location; metadata bar: **capture time**, **lat/lon**, **ISO**, **aperture**, **shutter**
+- Default map center: your **current location**
 - Dismissable notice if multiple files are dropped or the photo has **no GPS**
-- Standalone package: `requirements-lite.txt`, `lite_server.py`, `web-lite/` (~35 MB venv vs ~105 MB full)
-- Download: [LocateIt-Lite v1.1.0](https://github.com/markyip/LocateIt/releases/tag/v1.1.0-lite)
+- Standalone package: `requirements-lite.txt`, `lite_server.py`, `web-lite/` only
 
-### Full app (also in v1.1.0)
+**Launchers:** `run-lite.bat` / `run-lite.sh` (or extract `LocateIt-Lite-v1.1.0.zip`)
 
-- Launchers auto-stop any existing server on port 8765 before starting
-- README logo, shields, and Lite download link
+---
+
+### Known limitations
+
+- Map tiles require internet (OpenStreetMap)
+- Browser mode saving requires Chrome or Edge and folder permission
+- RAW metadata / save needs PyExiv2 (and Exiv2 on PATH for full-app RAW save)
+- One server instance per port (8765) — launchers auto-stop the previous instance; use `stop.bat` / `stop.sh` if stuck
 
 ---
 
 ## v1.0.0 — Initial public release
 
-First public release of **LocateIt** — geotag photo albums on an interactive map.
+First public release of **LocateIt** (full app only).
 
 ### Highlights
 
@@ -59,15 +97,3 @@ First public release of **LocateIt** — geotag photo albums on an interactive m
 
 - Windows: `run-desktop.bat`, `run.bat`, `stop.bat`
 - macOS / Linux: `run-desktop.sh`, `run.sh`, `stop.sh`
-
-### Known limitations
-
-- Map tiles require internet (OpenStreetMap)
-- Browser mode saving requires Chrome or Edge and folder permission
-- RAW geotag needs Exiv2 available to the Python process
-- Only one server instance per port (8765) — launchers auto-stop the previous instance; use `stop.bat` / `stop.sh` if the port is still stuck
-
-### Requirements
-
-- Python 3.10+
-- See [README.md](README.md) for full setup and troubleshooting
