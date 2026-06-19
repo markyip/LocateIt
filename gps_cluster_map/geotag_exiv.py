@@ -10,17 +10,7 @@ try:
 except ImportError:  # pragma: no cover
     pyexiv2 = None  # type: ignore
 
-from gps_cluster_map.raw_thumbnails import RAW_SUFFIXES
-
-GEOTAG_SUFFIXES = RAW_SUFFIXES | {
-    ".jpg",
-    ".jpeg",
-    ".tif",
-    ".tiff",
-    ".heic",
-    ".heif",
-    ".webp",
-}
+from gps_cluster_map.formats import GEOTAG_SUFFIXES, RAW_SUFFIXES
 
 
 def geotag_available() -> bool:

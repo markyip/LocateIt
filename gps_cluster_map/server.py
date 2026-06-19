@@ -24,6 +24,7 @@ from gps_cluster_map.geotag_exiv import (
     is_geotag_path,
     read_gps_from_bytes,
 )
+from gps_cluster_map.photo_metadata import read_photo_metadata_from_bytes
 from gps_cluster_map.native_dialog import pick_album_folder_via_photo
 from gps_cluster_map.scanner import (
     DEFAULT_CLUSTER_RADIUS_M,
@@ -338,6 +339,22 @@ def api_geotag_path(body: GeotagPathRequest) -> dict:
         "lon": verified.lon,
         "name": verified.name or Path(body.path).name,
     }
+
+
+@app.post("/api/metadata/read")
+async def api_metadata_read(file: UploadFile = File(...)) -> dict:
+    """Read GPS and camera metadata from a single uploaded photo."""
+    if not file.filename:
+        raise HTTPException(status_code=400, detail="Missing filename")
+
+    data = await file.read()
+    if not data:
+        raise HTTPException(status_code=400, detail="Empty file")
+
+    meta = read_photo_metadata_from_bytes(data, file.filename)
+    if not meta.has_gps():
+        raise HTTPException(status_code=404, detail="No GPS in file")
+    return meta.to_dict()
 
 
 @app.post("/api/gps/read")

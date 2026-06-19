@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocateIt Lite</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="css/lite.css" />
+  </head>
+  <body>
+    <header class="lite-header">
+      <div class="lite-brand">
+        <img class="lite-brand-logo" src="img/logo-mark.png" width="40" height="40" alt="" aria-hidden="true" />
+        <div>
+          <h1>LocateIt Lite</h1>
+          <p class="lite-tagline">See where a photo was taken</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="lite-map-wrap">
+      <div id="map" class="lite-map"></div>
+      <div id="drop-hint" class="lite-drop-hint" aria-hidden="true">
+        <p>Drop a geotagged photo here</p>
+        <p class="lite-drop-hint-sub">One image at a time · JPEG, RAW, HEIC…</p>
+      </div>
+    </main>
+
+    <footer id="metadata-bar" class="lite-metadata" hidden>
+      <div class="lite-metadata-file">
+        <img id="metadata-thumb" class="lite-metadata-thumb" alt="" width="56" height="56" hidden />
+        <span id="metadata-name" class="lite-metadata-name"></span>
+      </div>
+      <dl class="lite-metadata-grid">
+        <div class="lite-metadata-item">
+          <dt>Captured</dt>
+          <dd id="meta-capture">—</dd>
+        </div>
+        <div class="lite-metadata-item">
+          <dt>Latitude</dt>
+          <dd id="meta-lat">—</dd>
+        </div>
+        <div class="lite-metadata-item">
+          <dt>Longitude</dt>
+          <dd id="meta-lon">—</dd>
+        </div>
+        <div class="lite-metadata-item">
+          <dt>ISO</dt>
+          <dd id="meta-iso">—</dd>
+        </div>
+        <div class="lite-metadata-item">
+          <dt>Aperture</dt>
+          <dd id="meta-aperture">—</dd>
+        </div>
+        <div class="lite-metadata-item">
+          <dt>Shutter</dt>
+          <dd id="meta-shutter">—</dd>
+        </div>
+      </dl>
+    </footer>
+
+    <div id="lite-toast" class="lite-toast hidden" role="alert">
+      <p id="lite-toast-message" class="lite-toast-message"></p>
+      <button id="lite-toast-dismiss" type="button" class="lite-toast-dismiss" aria-label="Dismiss">×</button>
+    </div>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/lite.umd.js"></script>
+    <script type="module" src="js/lite.js"></script>
+  </body>
+</html>

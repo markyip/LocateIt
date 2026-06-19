@@ -12,11 +12,7 @@ from PIL import Image, ImageOps, ImageFile
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-RAW_SUFFIXES = {
-    ".3fr", ".arw", ".cr2", ".cr3", ".dng", ".erf", ".iiq", ".nef", ".nrw",
-    ".orf", ".pef", ".raf", ".raw", ".rw2", ".srw", ".x3f", ".cap", ".fff",
-    ".mef", ".mos", ".rwl", ".srf",
-}
+from gps_cluster_map.formats import RAW_SUFFIXES
 
 _ORIENTATION_NAMES = {
     "Horizontal (normal)": 1,
