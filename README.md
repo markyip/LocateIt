@@ -21,69 +21,97 @@ Repository: [github.com/markyip/LocateIt](https://github.com/markyip/LocateIt)
 
 ## Quick start
 
-### Recommended — Desktop mode (Windows)
+Two apps, one repo — pick the workflow you need:
 
-Best for everyday use: **one native “Open File” dialog**, no browser folder picker, full JPEG & RAW save support.
+| | **LocateIt** (full) | **LocateIt Lite** |
+|---|---------------------|-------------------|
+| Purpose | Geotag a whole album | View one geotagged photo |
+| Recommended launcher | **Desktop mode** | **Browser** (`run-lite`) |
+| Download | Source code (zip) on [v1.1.0](https://github.com/markyip/LocateIt/releases/tag/v1.1.0) | **`LocateIt-Lite-v1.1.0.zip`** on the same release |
+
+---
+
+### LocateIt (full) — desktop mode
+
+Use **desktop mode** on Windows, macOS, and Linux: native **Open File** dialog, full JPEG & RAW save, no browser folder picker.
+
+**Windows**
 
 ```batch
 run-desktop.bat
 ```
 
-Pick **any photo** in your album — the **whole folder** loads. GPS is written back to the original files when you click **Save**.
+**macOS / Linux**
 
-### Browser mode (Windows)
-
-```batch
-run.bat
+```bash
+chmod +x run-desktop.sh stop.sh   # first time only
+./run-desktop.sh
 ```
 
-Opens **http://127.0.0.1:8765/** in your browser. Uses the File System Access API (Chrome / Edge). Saving GPS requires granting folder access; the first open may ask for folder permission again.
+Pick **any photo** in your album — the **whole folder** loads. GPS is written back to the original files when you click **Save**.
 
-Pre-fill folders via server scan (read-only map preview):
+**macOS notes:** Homebrew Python often needs Tkinter: `brew install python-tk@3.12`. If RAW save fails, try `brew install gettext inih`.
+
+<details>
+<summary>Full app — browser mode (optional)</summary>
+
+Chrome / Edge only for saving GPS. Uses the File System Access API; you may need to grant folder permission again on each visit.
+
+**Windows:** `run.bat`  
+**macOS / Linux:** `./run.sh`
+
+Pre-fill a folder for read-only map preview:
 
 ```batch
 run.bat "D:\Photos\Trip2024"
 ```
 
-### LocateIt Lite — one photo, read-only
+</details>
 
-Drop **one geotagged photo** on the map to see where it was taken (capture time, lat/lon, ISO, aperture, shutter). No album import, no GPS editing, no session memory. Uses a smaller Python install (~35 MB venv vs ~105 MB for full LocateIt).
+---
+
+### LocateIt Lite — browser mode
+
+Lite runs in your **browser** only: drag **one geotagged photo** onto the map. Read-only — capture time, lat/lon, ISO, aperture, shutter. No album import, no GPS editing, no session memory. Smaller install (~35 MB venv vs ~105 MB for full LocateIt).
 
 **Download:** [v1.1.0 release](https://github.com/markyip/LocateIt/releases/tag/v1.1.0) → **`LocateIt-Lite-v1.1.0.zip`**
 
-From this repo (developers):
+**Windows**
 
 ```batch
 run-lite.bat
 ```
 
+**macOS / Linux**
+
 ```bash
+chmod +x run-lite.sh stop.sh   # first time only
 ./run-lite.sh
 ```
 
-See [README-LITE.md](README-LITE.md) for details.
+Opens **http://127.0.0.1:8765/** — keep the terminal open, then drop a photo on the map. See [README-LITE.md](README-LITE.md).
 
-### macOS / Linux
+---
 
-```bash
-chmod +x run-desktop.sh run.sh           # first time only
-./run-desktop.sh                         # desktop mode (recommended)
-# or
-./run.sh                                 # browser mode
-```
+### Manual setup (developers)
 
-Manual setup:
+**Full app — desktop**
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python desktop.py           # desktop mode
-# or
-python run.py               # browser mode
+python desktop.py
 ```
 
-**macOS notes:** Homebrew Python often needs Tkinter for desktop mode: `brew install python-tk@3.12`. If RAW save fails to load, try `brew install gettext inih`.
+**Lite — browser**
+
+```bash
+python3 -m venv .venv-lite
+source .venv-lite/bin/activate     # Windows: .venv-lite\Scripts\activate
+pip install -r requirements-lite.txt
+python lite.py
+```
 
 ---
 

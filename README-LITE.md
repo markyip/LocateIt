@@ -6,6 +6,8 @@ Full **LocateIt** (album geotagging): [github.com/markyip/LocateIt](https://gith
 
 ## Quick start
 
+Lite runs in your **browser**: a local server opens **http://127.0.0.1:8765/** — drag one geotagged photo onto the map. (Full **LocateIt** album geotagging uses **desktop mode** — see [README.md](README.md).)
+
 ### Windows
 
 ```batch
