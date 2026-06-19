@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-VERSION="${1:-1.1.0}"
+VERSION="${1:-1.1.1}"
 NAME="LocateIt-Lite-v${VERSION}"
 STAGE="$ROOT/dist/$NAME"
 ZIP="$ROOT/dist/${NAME}.zip"
@@ -17,8 +17,18 @@ copy() {
   cp "$1" "$STAGE/$2"
 }
 
+normalize_lf() {
+  local f="$1"
+  tr -d '\r' < "$f" > "$f.lf" && mv "$f.lf" "$f"
+}
+
 for f in lite.py run-lite.bat run-lite.sh stop.bat stop.sh requirements-lite.txt README-LITE.md; do
   copy "$f" "$f"
+done
+
+for f in run-lite.sh stop.sh; do
+  normalize_lf "$STAGE/$f"
+  chmod +x "$STAGE/$f" 2>/dev/null || true
 done
 
 for m in __init__.py formats.py photo_metadata.py geotag_exiv.py scanner.py lite_server.py; do

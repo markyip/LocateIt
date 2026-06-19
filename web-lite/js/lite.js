@@ -230,8 +230,13 @@ function setThumbPreview(file) {
 }
 
 async function readMetadataClient(file) {
+  if (typeof exifr === "undefined") return null;
+
   const parsed = await exifr.parse(file, {
     gps: true,
+    mergeOutput: true,
+    reviveValues: true,
+    tiff: true,
     pick: [
       "DateTimeOriginal",
       "CreateDate",
@@ -273,7 +278,14 @@ async function readMetadataClient(file) {
 async function readMetadataServer(file) {
   const body = new FormData();
   body.append("file", file, file.name);
-  const res = await fetch("/api/metadata/read", { method: "POST", body });
+  let res;
+  try {
+    res = await fetch("/api/metadata/read", { method: "POST", body });
+  } catch {
+    throw new Error(
+      "Could not reach the LocateIt server. Keep ./run-lite.sh running in Terminal."
+    );
+  }
   if (res.status === 404) return null;
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));

@@ -9,7 +9,12 @@ from pathlib import Path
 
 import exifread
 
-from gps_cluster_map.geotag_exiv import _gps_from_pyexiv2_exif, read_gps_from_bytes
+from gps_cluster_map.geotag_exiv import (
+    _enable_bmff_for_filename,
+    _gps_from_pyexiv2_exif,
+    _gps_from_pyexiv2_xmp,
+    read_gps_from_bytes,
+)
 from gps_cluster_map.scanner import _extract_gps_from_tags, _ratio_to_float, _tag_text
 
 try:
@@ -144,14 +149,34 @@ def read_photo_metadata_from_bytes(data: bytes, filename: str) -> PhotoMetadata:
     if not data:
         return PhotoMetadata(name=name)
 
+    meta: PhotoMetadata | None = None
     if pyexiv2 is not None:
         try:
+            _enable_bmff_for_filename(filename)
             with pyexiv2.ImageData(data) as img:
-                return _metadata_from_pyexiv2_exif(img.read_exif(), filename)
+                meta = _metadata_from_pyexiv2_exif(img.read_exif(), filename)
+                if not meta.has_gps():
+                    try:
+                        coords = _gps_from_pyexiv2_xmp(img.read_xmp())
+                        if coords:
+                            lat, lon = coords
+                            meta = PhotoMetadata(
+                                name=meta.name,
+                                lat=lat,
+                                lon=lon,
+                                capture_time=meta.capture_time,
+                                iso=meta.iso,
+                                aperture=meta.aperture,
+                                shutter_speed=meta.shutter_speed,
+                            )
+                    except Exception:
+                        pass
         except Exception:
-            pass
+            meta = None
 
-    meta = _metadata_via_tempfile(data, filename)
+    if meta is None:
+        meta = _metadata_via_tempfile(data, filename)
+
     if meta.has_gps():
         return meta
 

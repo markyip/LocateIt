@@ -1,5 +1,26 @@
 # Release notes
 
+## v1.1.1
+
+Bug-fix release for **LocateIt Lite** on macOS and improved GPS metadata reading.
+
+### Fixes
+
+- **macOS shell scripts** — `.sh` launchers self-repair CRLF line endings from Windows-built zips; release builds normalize LF
+- **macOS startup** — document Terminal launch (`bash run-lite.sh`); fix `stop.sh` on external/network volumes; force-clear stale port 8765
+- **GPS metadata** — PyExiv2 fallback when EXIF lacks GPS; XMP GPS parsing; HEIC BMFF support; stronger browser/server metadata path in Lite UI
+
+### Downloads
+
+| Package | Download |
+|---------|----------|
+| **LocateIt Lite** | **`LocateIt-Lite-v1.1.1.zip`** on [this release](https://github.com/markyip/LocateIt/releases/tag/v1.1.1) |
+| **LocateIt (full)** | Clone or source zip from this tag — same launchers benefit from shell fixes |
+
+**macOS Lite:** start from Terminal: `bash run-lite.sh` (see [README-LITE.md](README-LITE.md)).
+
+---
+
 ## v1.1.0
 
 Geotag photo albums on a map (**LocateIt**) and view where a single photo was taken (**LocateIt Lite**). Both are included in this release.

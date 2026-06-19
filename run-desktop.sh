@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
+grep -q $'\r' "$0" 2>/dev/null && tr -d '\r' < "$0" > "$0.lf" && mv "$0.lf" "$0" && chmod +x "$0" && exec bash "$0" "$@"
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
+[ -f "$ROOT/stop.sh" ] && grep -q $'\r' "$ROOT/stop.sh" 2>/dev/null && tr -d '\r' < "$ROOT/stop.sh" > "$ROOT/stop.sh.lf" && mv "$ROOT/stop.sh.lf" "$ROOT/stop.sh" && chmod +x "$ROOT/stop.sh"
 cd "$ROOT"
 
 echo "Checking for an existing LocateIt server..."

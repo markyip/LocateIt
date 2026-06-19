@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 
 try:
@@ -11,6 +12,8 @@ except ImportError:  # pragma: no cover
     pyexiv2 = None  # type: ignore
 
 from gps_cluster_map.formats import GEOTAG_SUFFIXES, RAW_SUFFIXES
+
+_XMP_GPS_RE = re.compile(r"(\d+),(\d+(?:\.\d+)?)([NSEW])", re.IGNORECASE)
 
 
 def geotag_available() -> bool:
@@ -116,16 +119,58 @@ def _gps_from_pyexiv2_exif(exif: dict) -> tuple[float, float] | None:
     return lat, lon
 
 
+def _parse_xmp_gps(raw, is_lat: bool) -> float | None:
+    if raw is None:
+        return None
+    match = _XMP_GPS_RE.match(str(raw).strip())
+    if not match:
+        return None
+    degrees = int(match.group(1))
+    minutes = float(match.group(2))
+    hemi = match.group(3).upper()
+    dec = degrees + minutes / 60.0
+    if hemi in ("S", "W"):
+        dec = -dec
+    if is_lat and not (-90 <= dec <= 90):
+        return None
+    if not is_lat and not (-180 <= dec <= 180):
+        return None
+    return dec
+
+
+def _gps_from_pyexiv2_xmp(xmp: dict) -> tuple[float, float] | None:
+    lat = _parse_xmp_gps(xmp.get("Xmp.exif.GPSLatitude"), True)
+    lon = _parse_xmp_gps(xmp.get("Xmp.exif.GPSLongitude"), False)
+    if lat is None or lon is None:
+        return None
+    return lat, lon
+
+
+def _enable_bmff_for_filename(filename: str) -> None:
+    if pyexiv2 is None:
+        return
+    suffix = Path(filename).suffix.lower()
+    if suffix in {".heic", ".heif"} and hasattr(pyexiv2, "enableBMFF"):
+        pyexiv2.enableBMFF(True)
+
+
 def read_gps_from_bytes(data: bytes, filename: str) -> tuple[float, float] | None:
     """Read GPS coordinates from image bytes (PyExiv2 + exifread fallback)."""
     if pyexiv2 is None or not data:
         return None
 
+    _enable_bmff_for_filename(filename)
     try:
         with pyexiv2.ImageData(data) as img:
             coords = _gps_from_pyexiv2_exif(img.read_exif())
             if coords:
                 return coords
+            try:
+                coords = _gps_from_pyexiv2_xmp(img.read_xmp())
+                if coords:
+                    return coords
+            except Exception:
+                pass
     except Exception:
         pass
 

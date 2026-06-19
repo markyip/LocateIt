@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.1.0-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-1.1.1-blue" alt="Version">
   <img src="https://img.shields.io/github/downloads/markyip/LocateIt/total" alt="Downloads">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
   <a href="https://www.buymeacoffee.com/markyip"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-orange?logo=buy-me-a-coffee" alt="Buy Me a Coffee"></a>
@@ -15,7 +15,7 @@ Each cluster pin shows **how many photos** share that location (default **5 m** 
 
 Repository: [github.com/markyip/LocateIt](https://github.com/markyip/LocateIt)
 
-**LocateIt Lite** (single-photo viewer): same [v1.1.0 release](https://github.com/markyip/LocateIt/releases/tag/v1.1.0) — download **`LocateIt-Lite-v1.1.0.zip`** · [README-LITE.md](README-LITE.md)
+**LocateIt Lite** (single-photo viewer): [v1.1.1 release](https://github.com/markyip/LocateIt/releases/tag/v1.1.1) — download **`LocateIt-Lite-v1.1.1.zip`** · [README-LITE.md](README-LITE.md)
 
 ---
 
@@ -27,7 +27,7 @@ Two apps, one repo — pick the workflow you need:
 |---|---------------------|-------------------|
 | Purpose | Geotag a whole album | View one geotagged photo |
 | Recommended launcher | **Desktop mode** | **Browser** (`run-lite`) |
-| Download | Source code (zip) on [v1.1.0](https://github.com/markyip/LocateIt/releases/tag/v1.1.0) | **`LocateIt-Lite-v1.1.0.zip`** on the same release |
+| Download | Source code (zip) on [v1.1.1](https://github.com/markyip/LocateIt/releases/tag/v1.1.1) | **`LocateIt-Lite-v1.1.1.zip`** on the same release |
 
 ---
 
@@ -74,7 +74,7 @@ run.bat "D:\Photos\Trip2024"
 
 Lite runs in your **browser** only: drag **one geotagged photo** onto the map. Read-only — capture time, lat/lon, ISO, aperture, shutter. No album import, no GPS editing, no session memory. Smaller install (~35 MB venv vs ~105 MB for full LocateIt).
 
-**Download:** [v1.1.0 release](https://github.com/markyip/LocateIt/releases/tag/v1.1.0) → **`LocateIt-Lite-v1.1.0.zip`**
+**Download:** [v1.1.1 release](https://github.com/markyip/LocateIt/releases/tag/v1.1.1) → **`LocateIt-Lite-v1.1.1.zip`**
 
 **Windows**
 
@@ -84,10 +84,13 @@ run-lite.bat
 
 **macOS / Linux**
 
+Start from Terminal (do not double-click `run-lite.sh`):
+
 ```bash
-chmod +x run-lite.sh stop.sh   # first time only
-./run-lite.sh
+bash run-lite.sh
 ```
+
+On external drives (e.g. `/Volumes/Development/...`), always use `bash run-lite.sh` — not `./run-lite.sh`.
 
 Opens **http://127.0.0.1:8765/** — keep the terminal open, then drop a photo on the map. See [README-LITE.md](README-LITE.md).
 
