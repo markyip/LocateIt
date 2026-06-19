@@ -27,7 +27,12 @@ Keep the Terminal window open while using the app. Your browser should open **ht
 
 On external or network drives (e.g. `/Volumes/Development/...`), always use `bash run-lite.sh` — do not use `./run-lite.sh` (macOS cannot set execute permission on those volumes).
 
-Requires **Python 3.10+**. First run creates a small `.venv-lite` (about **~35 MB** vs ~105 MB for full LocateIt).
+Requires **Python 3.10+**. First run creates `.venv-lite` (~**5 MB** site-packages: exifread + pyexiv2 only). If you upgraded from an older Lite build and `.venv-lite` is still large, delete it and run again:
+
+```bash
+rm -rf .venv-lite
+bash run-lite.sh
+```
 
 If `bash run-lite.sh` fails with `pipefail: invalid option name`, the zip was built on Windows with CRLF line endings — re-download a fixed build, or run `tr -d '\r' < run-lite.sh > run-lite-fixed.sh && bash run-lite-fixed.sh`. Current scripts also self-repair on first launch.
 

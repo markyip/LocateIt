@@ -31,7 +31,7 @@ for f in run-lite.sh stop.sh; do
   chmod +x "$STAGE/$f" 2>/dev/null || true
 done
 
-for m in __init__.py formats.py photo_metadata.py geotag_exiv.py scanner.py lite_server.py; do
+for m in __init__.py formats.py photo_metadata.py geotag_exiv.py scanner.py lite_http.py; do
   copy "gps_cluster_map/$m" "gps_cluster_map/$m"
 done
 

@@ -50,7 +50,7 @@ $PyModules = @(
     "photo_metadata.py",
     "geotag_exiv.py",
     "scanner.py",
-    "lite_server.py"
+    "lite_http.py"
 )
 foreach ($m in $PyModules) {
     Copy-Item (Join-Path $Root "gps_cluster_map\$m") (Join-Path $Stage "gps_cluster_map\$m")

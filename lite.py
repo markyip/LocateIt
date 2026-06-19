@@ -10,7 +10,7 @@ import threading
 import time
 import webbrowser
 
-import uvicorn
+from gps_cluster_map.lite_http import serve
 
 DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 8765
@@ -51,13 +51,7 @@ def main() -> int:
 
     print(f"LocateIt Lite: {url}")
     print("Drop a geotagged photo on the map.")
-    uvicorn.run(
-        "gps_cluster_map.lite_server:app",
-        host=args.host,
-        port=args.port,
-        reload=False,
-        log_level="info",
-    )
+    serve(args.host, args.port)
     return 0
 
 
