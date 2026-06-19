@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue" alt="Version">
+  <img src="https://img.shields.io/badge/version-1.1.0-blue" alt="Version">
   <img src="https://img.shields.io/github/downloads/markyip/LocateIt/total" alt="Downloads">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
   <a href="https://www.buymeacoffee.com/markyip"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-orange?logo=buy-me-a-coffee" alt="Buy Me a Coffee"></a>
@@ -14,6 +14,8 @@
 Each cluster pin shows **how many photos** share that location (default **5 m** radius). Hover a pin for thumbnail previews; click to open a lightbox with a film strip.
 
 Repository: [github.com/markyip/LocateIt](https://github.com/markyip/LocateIt)
+
+**LocateIt Lite** (single-photo GPS viewer, smaller install): [Download v1.1.0](https://github.com/markyip/LocateIt/releases/tag/v1.1.0-lite) · [README-LITE.md](README-LITE.md)
 
 ---
 
@@ -42,6 +44,24 @@ Pre-fill folders via server scan (read-only map preview):
 ```batch
 run.bat "D:\Photos\Trip2024"
 ```
+
+### LocateIt Lite — one photo, read-only
+
+Drop **one geotagged photo** on the map to see where it was taken (capture time, lat/lon, ISO, aperture, shutter). No album import, no GPS editing, no session memory. Uses a smaller Python install (~35 MB venv vs ~105 MB for full LocateIt).
+
+**Download:** [LocateIt-Lite v1.1.0 zip](https://github.com/markyip/LocateIt/releases/download/v1.1.0-lite/LocateIt-Lite-v1.1.0.zip) · [Release notes](https://github.com/markyip/LocateIt/releases/tag/v1.1.0-lite)
+
+From this repo (developers):
+
+```batch
+run-lite.bat
+```
+
+```bash
+./run-lite.sh
+```
+
+See [README-LITE.md](README-LITE.md) for details.
 
 ### macOS / Linux
 
@@ -145,22 +165,24 @@ Or use another port:
 
 ```
 LocateIt/                     # repo (Python package: gps_cluster_map)
-  run-desktop.bat / run.bat   # Windows launchers
+  run-desktop.bat / run.bat   # Windows launchers (full app)
+  run-lite.bat / run-lite.sh  # LocateIt Lite (metadata viewer only)
   run-desktop.sh / run.sh     # macOS / Linux launchers
   stop.bat / stop.sh          # Free port 8765
-  desktop.py / run.py         # Entry points
+  desktop.py / run.py         # Full app entry points
+  lite.py                       # Lite entry point
+  requirements-lite.txt         # Lite deps (no Pillow/rawpy)
   gps_cluster_map/
     server.py                 # FastAPI — scan, thumbnails, geotag, desktop APIs
+    lite_server.py            # Lite — metadata read only
     album_scan.py             # Full album scan (GPS + pending)
     native_dialog.py          # Tkinter Open File → parent folder (desktop)
     desktop_config.py         # Last album path (%LOCALAPPDATA%/LocateIt)
     scanner.py                # EXIF GPS + union-find clustering
     geotag_exiv.py            # In-place GPS write (desktop save)
-  web/
-    index.html                # Leaflet UI
-    js/app.js                 # Album workflow, map, save
-    js/map.js                 # Pins, hover, placement drag
-    js/gallery.js             # Sidebar thumbnails, pointer drag to map
+    photo_metadata.py         # Lite metadata read
+  web/                        # Full app UI
+  web-lite/                   # Lite UI only
 ```
 
 ---

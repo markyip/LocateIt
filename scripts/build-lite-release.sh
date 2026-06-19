@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-VERSION="${1:-1.0.0}"
+VERSION="${1:-1.1.0}"
 NAME="LocateIt-Lite-v${VERSION}"
 STAGE="$ROOT/dist/$NAME"
 ZIP="$ROOT/dist/${NAME}.zip"

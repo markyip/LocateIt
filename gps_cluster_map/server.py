@@ -50,7 +50,7 @@ DESKTOP_MODE = os.environ.get("GPS_CLUSTER_MAP_DESKTOP", "").strip().lower() in 
     "yes",
 )
 
-app = FastAPI(title="LocateIt", version="0.1.0")
+app = FastAPI(title="LocateIt", version="1.1.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

@@ -1,4 +1,4 @@
-# LocateIt Lite
+# LocateIt Lite v1.1.0
 
 Drop **one geotagged photo** on the map to see where it was taken. Read-only — no album import, no GPS editing, no session memory.
 

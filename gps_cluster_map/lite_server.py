@@ -13,7 +13,7 @@ from gps_cluster_map.photo_metadata import read_photo_metadata_from_bytes
 
 WEB_DIR = Path(__file__).resolve().parent.parent / "web-lite"
 
-app = FastAPI(title="LocateIt Lite", version="1.0.0")
+app = FastAPI(title="LocateIt Lite", version="1.1.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

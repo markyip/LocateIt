@@ -1,5 +1,25 @@
 # Release notes
 
+## v1.1.0 — LocateIt Lite
+
+Adds **LocateIt Lite**, a read-only single-photo GPS viewer with a smaller install footprint.
+
+### LocateIt Lite
+
+- Drop **one geotagged photo** on the map — no Open album button, no folder scan
+- Shows capture time, latitude/longitude, ISO, aperture, and shutter speed
+- Default map center: your **current location** (browser geolocation)
+- Dismissable notice if multiple files are dropped or the photo has **no GPS**
+- Standalone package: `requirements-lite.txt`, `lite_server.py`, `web-lite/` (~35 MB venv vs ~105 MB full)
+- Download: [LocateIt-Lite v1.1.0](https://github.com/markyip/LocateIt/releases/tag/v1.1.0-lite)
+
+### Full app (also in v1.1.0)
+
+- Launchers auto-stop any existing server on port 8765 before starting
+- README logo, shields, and Lite download link
+
+---
+
 ## v1.0.0 — Initial public release
 
 First public release of **LocateIt** — geotag photo albums on an interactive map.
